@@ -151,7 +151,7 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 ```
 
 ### Variantes restantes pós filtragem.
-### Resultado esperado: WP190 (5) e WP017 (3).
+Resultado esperado: WP190 (5) e WP017 (3).
 
 ```zcat wp190_filtered.vcf.gz | grep -v "\#" | wc -l```
 
@@ -235,7 +235,7 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 ```
 
 ### Variantes candidatas pós filtragem com Painel de Normais (PoN).
-### Resultados esperados: WP190 (2) e WP017 (2)
+Resultados esperados: WP190 (2) e WP017 (2)
 
 ```zcat wp190.filtered.pon.vcf.gz | grep -v "\#" | grep PASS | wc -l```
 
