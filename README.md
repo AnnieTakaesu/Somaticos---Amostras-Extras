@@ -97,26 +97,26 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	-O tumor_wp190.table
 ```
 ```
-    ./gatk-4.2.2.0/gatk GetPileupSummaries \
+	./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp191.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp191.table
 ```
 ```
-    ./gatk-4.2.2.0/gatk GetPileupSummaries \
+	./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp017.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp017.table
 ```
 ```
-    ./gatk-4.2.2.0/gatk GetPileupSummaries \
+	./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp018.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp018.table
-	```
+```
 
 ### Cálculo da Contaminação: estimativa da porcentagem de contaminação por outras amostras através da comparação da frequência alélica das variantes da amostra normal.
 
@@ -183,13 +183,14 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 
 ### Chamada de variantes somáticas, com base no banco de frequências alélicas germinativas e com Painel de Normais (PoN).
 
-```./gatk-4.2.2.0/gatk Mutect2 \
-  -R hg19.fa \
-  -I tumor_wp190.bam \
-  --germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
-  --panel-of-normals Mutect2-exome-panel.vcf \
-  -L hg19.interval_list \
-  -O wp190.somatic.pon.vcf.gz
+```
+	./gatk-4.2.2.0/gatk Mutect2 \
+	-R hg19.fa \
+	-I tumor_wp190.bam \
+	--germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
+	--panel-of-normals Mutect2-exome-panel.vcf \
+	-L hg19.interval_list \
+	-O wp190.somatic.pon.vcf.gz
 ```
 ```
 	./gatk-4.2.2.0/gatk Mutect2 \
