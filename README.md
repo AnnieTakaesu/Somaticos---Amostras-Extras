@@ -1,6 +1,7 @@
 # Somaticos---Amostras-Extras
 Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
+
 ## Atualização e instalação das ferramentas
 
 ### Atualizar repositório
@@ -16,12 +17,15 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 ```unzip gatk-4.2.2.0.zip```
 
+
+
 ## Amostras Extras
 
-### - WP190 (tumor) e WP191 (normal)
-### - WP017 (tumor) e WP018 (normal)
+### WP190 (tumor) e WP191 (normal)
+### WP017 (tumor) e WP018 (normal)
 ### Nota 1: Utilizar o af-gnomad chr13 e chr19.
 ### Nota 2: Será preciso baixar o chr13 e chr19 da UCSC.
+
 
 ## Download das referências chr13 e chr19
 
@@ -29,23 +33,28 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 ```wget -c https://hgdownload.soe.ucsc.edu/goldenPath/hg19/chromosomes/chr13.fa.gz```
 
-### Concatenar os arquivos .fa.gz para hg19 e substituir "chr".
+
+### Concatenar os arquivos .fa.gz para hg19 e substituir "chr"
 
 ```zcat chr13.fa.gz chr19.fa.gz | sed -e "s/chr//g" > hg19.fa```
+
 
 ### Gerar o index do arquivo hg19.fa
 
 ```samtools faidx hg19.fa```
 
-### Criar dicionário da referência.
+
+### Criar dicionário da referência
 
 ```./gatk-4.2.2.0/gatk CreateSequenceDictionary -R hg19.fa -O hg19.dict```
 
-### Dividir o genoma de referência em intervalos baseados em regiões com bases indeterminadas.
+
+### Dividir o genoma de referência em intervalos baseados em regiões com bases indeterminadas
 
 ```./gatk-4.2.2.0/gatk ScatterIntervalsByNs -R hg19.fa -O hg19.interval_list -OT ACGT```
 
-### Verificar o nome das amostras (SM).
+
+### Verificar o nome das amostras (SM)
 
 ```samtools view -H tumor_wp191.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
 ```samtools view -H tumor_wp190.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
@@ -62,9 +71,9 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 	-normal WP191 \
 	--germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
 	-O wp190_somatic.vcf.gz \
-	-L hg19.interval_list```
+	-L hg19.interval_list
 
-```./gatk-4.2.2.0/gatk Mutect2 \
+    ./gatk-4.2.2.0/gatk Mutect2 \
 	-R hg19.fa \
 	-I tumor_wp018.bam \
 	-I tumor_wp017.bam \
@@ -73,33 +82,33 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 	-O wp017_somatic.vcf.gz \
 	-L hg19.interval_list```
 
-### Tabulação das métricas para inferência de contaminação na amostra tumoral e normal.
+### Tabulação das métricas para inferência de contaminação na amostra tumoral e normal
 
 ```./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp190.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
-	-O tumor_wp190.table```
+	-O tumor_wp190.table
 
-```./gatk-4.2.2.0/gatk GetPileupSummaries \
+    ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp191.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
-	-O tumor_wp191.table```
+	-O tumor_wp191.table
 
-```./gatk-4.2.2.0/gatk GetPileupSummaries \
+    ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp017.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
-	-O tumor_wp017.table```
+	-O tumor_wp017.table
 
-```./gatk-4.2.2.0/gatk GetPileupSummaries \
+    ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp018.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp018.table```
 
-### Cálculo da Contaminação: estimativa da porcentagem de contaminação por outras amostras através da comparação da frequência alélica das variantes da amostra normal.
+Cálculo da Contaminação: estimativa da porcentagem de contaminação por outras amostras através da comparação da frequência alélica das variantes da amostra normal.
 
 ```./gatk-4.2.2.0/gatk CalculateContamination \
 	-I tumor_wp190.table \
