@@ -1,4 +1,4 @@
-# Somaticos---Amostras-Extras
+# Somaticos - Amostras Extras
 Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 
@@ -21,10 +21,10 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 ## Amostras Extras
 
-### WP190 (tumor) e WP191 (normal)
-### WP017 (tumor) e WP018 (normal)
-### Nota 1: Utilizar o af-gnomad chr13 e chr19.
-### Nota 2: Será preciso baixar o chr13 e chr19 da UCSC.
+WP190 (tumor) e WP191 (normal)
+WP017 (tumor) e WP018 (normal)
+Nota 1: Utilizar o af-gnomad chr13 e chr19.
+Nota 2: Será preciso baixar o chr13 e chr19 da UCSC.
 
 
 ## Download das referências chr13 e chr19.
