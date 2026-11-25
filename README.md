@@ -56,12 +56,11 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 ### Verificar o nome das amostras (SM).
 
-```
-samtools view -H tumor_wp191.bam | grep RG | cut -f5 | sed -e "s/SM://g"
-samtools view -H tumor_wp190.bam | grep RG | cut -f5 | sed -e "s/SM://g"
-samtools view -H tumor_wp018.bam | grep RG | cut -f6 | sed -e "s/SM://g"
-samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
-```
+```samtools view -H tumor_wp191.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
+```samtools view -H tumor_wp190.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
+```samtools view -H tumor_wp018.bam | grep RG | cut -f6 | sed -e "s/SM://g"```
+```samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"```
+
 
 ### Chamada de SNVs e indels comparando as amostras normal e tumoral.
 
@@ -74,7 +73,8 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	--germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
 	-O wp190_somatic.vcf.gz \
 	-L hg19.interval_list
-
+```
+```
 	./gatk-4.2.2.0/gatk Mutect2 \
 	-R hg19.fa \
 	-I tumor_wp018.bam \
@@ -87,25 +87,28 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 
 ### Tabulação das métricas para inferência de contaminação na amostra tumoral e normal.
 	
-	```
+```
 	./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp190.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp190.table
-
+```
+```
     ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp191.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp191.table
-
+```
+```
     ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp017.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
 	-L hg19.interval_list \
 	-O tumor_wp017.table
-
+```
+```
     ./gatk-4.2.2.0/gatk GetPileupSummaries \
 	-I tumor_wp018.bam \
 	-V af-only-gnomad-chr13-chr19.vcf.gz \
@@ -120,7 +123,8 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	-I tumor_wp190.table \
 	-matched tumor_wp191.table \
 	-O wp190_contamination.table
-
+```
+```
 	./gatk-4.2.2.0/gatk CalculateContamination \
 	-I tumor_wp017.table \
 	-matched tumor_wp018.table \
@@ -135,7 +139,8 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	-V wp190_somatic.vcf.gz \
 	--contamination-table wp190_contamination.table \
 	-O wp190_filtered.vcf.gz
-
+```
+```
 	./gatk-4.2.2.0/gatk FilterMutectCalls \
 	-R hg19.fa \
 	-V wp017_somatic.vcf.gz \
@@ -183,14 +188,15 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
   --panel-of-normals Mutect2-exome-panel.vcf \
   -L hg19.interval_list \
   -O wp190.somatic.pon.vcf.gz
-
+```
+```
 	./gatk-4.2.2.0/gatk Mutect2 \
-  -R hg19.fa \
-  -I tumor_wp017.bam \
-  --germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
-  --panel-of-normals Mutect2-exome-panel.vcf \
-  -L hg19.interval_list \
-  -O wp017.somatic.pon.vcf.gz
+	-R hg19.fa \
+	-I tumor_wp017.bam \
+	--germline-resource af-only-gnomad-chr13-chr19.vcf.gz \
+	--panel-of-normals Mutect2-exome-panel.vcf \
+	-L hg19.interval_list \
+	-O wp017.somatic.pon.vcf.gz
 ```
 
   
@@ -200,7 +206,8 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	./gatk-4.2.2.0/gatk CalculateContamination \
 	-I tumor_wp190.table \
 	-O wp190.contamination.pon.table
-
+```
+```
 	./gatk-4.2.2.0/gatk CalculateContamination \
 	-I tumor_wp017.table \
 	-O wp017.contamination.pon.table
@@ -215,7 +222,8 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 	-V wp190.somatic.pon.vcf.gz \
 	--contamination-table wp190.contamination.pon.table \
 	-O wp190.filtered.pon.vcf.gz
-
+```
+```
 	./gatk-4.2.2.0/gatk FilterMutectCalls \
 	-R hg19.fa \
 	-V wp017.somatic.pon.vcf.gz \
@@ -224,7 +232,7 @@ samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
 ```
 
 ### Variantes candidatas pós filtragem com Painel de Normais (PoN).
-### Resultados esperados: WP190 () e WP017 ()
+### Resultados esperados: WP190 (2) e WP017 (2)
 
 ```zcat wp190.filtered.pon.vcf.gz | grep -v "\#" | grep PASS | wc -l```
 
