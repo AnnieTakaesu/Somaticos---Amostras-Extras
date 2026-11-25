@@ -56,10 +56,12 @@ Amostras extras da atividade prática - Aula de somáticos do dia 14/11
 
 ### Verificar o nome das amostras (SM).
 
-```samtools view -H tumor_wp191.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
-```samtools view -H tumor_wp190.bam | grep RG | cut -f5 | sed -e "s/SM://g"```
-```samtools view -H tumor_wp018.bam | grep RG | cut -f6 | sed -e "s/SM://g"```
-```samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"```
+```
+samtools view -H tumor_wp191.bam | grep RG | cut -f5 | sed -e "s/SM://g"
+samtools view -H tumor_wp190.bam | grep RG | cut -f5 | sed -e "s/SM://g"
+samtools view -H tumor_wp018.bam | grep RG | cut -f6 | sed -e "s/SM://g"
+samtools view -H tumor_wp017.bam | grep RG | cut -f6 | sed -e "s/SM://g"
+```
 
 
 ### Chamada de SNVs e indels comparando as amostras normal e tumoral.
